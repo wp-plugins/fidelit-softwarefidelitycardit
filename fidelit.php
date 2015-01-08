@@ -5,7 +5,7 @@ Plugin URI: http://www.softwarefidelitycard.it
 Description: Software gestionale completo per la fidelizzazione dei clienti.
 Author: Gruppo Ambita Società Cooperativa
 Author URI: http://www.gruppoambita.com
-Version: 1.0
+Version: 1.1
 */
 
 include_once(dirname(__FILE__)."/common.php");
