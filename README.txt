@@ -56,7 +56,7 @@ Non disponibili.
 == Changelog ==
 
 = 1.1 =
-* Implementato il download automatico del FidElìt SDK ed l'upload da amministrazione dei certificati
+* Implementato il download automatico del FidElìt SDK e l'upload da amministrazione dei certificati
 
 = 1.0 =
 * Prima versione disponibile
