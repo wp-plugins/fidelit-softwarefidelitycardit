@@ -12,7 +12,7 @@ Software gestionale CRM per la fidelizzazione della clientela
 
 == Description ==
 
-FidElìt è un software gestionale CRM per la fidelizzazione della clientela, progettato e sviluppato da Gruppo Ambita Società Cooperativa.
+<a href=“http://www.softwarefidelitycard.it”>FidElìt</a> è un software gestionale CRM per la fidelizzazione della clientela, progettato e sviluppato da Gruppo Ambita Società Cooperativa.
 
 Il software consente di gestire facilmente campagne di raccolta punti, accumulo sconti, credito prepagato, acquisti ripetuti, gift card e coupon card. Inoltre offre un supporto a 360° per i centri commerciali naturali.
 
@@ -27,10 +27,16 @@ Grazie all'integrazione di questo plugin su un'installazione Wordpress pre-esist
 
 L'utilizzo del plugin è risevato ai clienti che hanno acquistato il software e sono in possesso di due chiavi segrete (API Key ed API Secret) generabili in totale autonomia tramite il pannello configurazione del software.
 
+Per maggiori informazioni, visita il nostro sito internet:
+<a href=“http://www.softwarefidelitycard.it”>http://www.softwarefidelitycard.it</a>
+
 == Installation ==
 
 L'installazione è abbastanza semplice. Una volta scaricato il plugin nella cartella plugins di Wordpress,
 bisognerà attivarlo dal pannello gestionale (di Wordpress).
+
+Maggiori informazioni potranno essere reperite nel DEV Central dell’applicativo, raggiungibile sul sito:
+<a href=“http://api.sistemafidelity.com/“>http://api.sistemafidelity.com/</a>
 
 
 == Frequently Asked Questions ==
