@@ -1,0 +1,123 @@
+#fidelit-overlay {
+    position: fixed;
+    z-index: 999990;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    cursor: pointer;
+}
+
+.fidelit-loading {
+    display: none;
+}
+
+.fidelit-msg-success {
+    padding: 8px;
+    background-color: #84cc72;
+    border: 1px solid #1f4f13;
+    color: #1f4f13;
+}
+
+.fidelit-msg-warning {
+    padding: 8px;
+    background-color: #fff8c4;
+    border: 1px solid #d37f02;
+    color: #d37f02;
+}
+
+.fidelit-msg-error {
+    padding: 8px;
+    background-color: #f7bbbb;
+    border: 1px solid #890c0c;
+    color: #890c0c;
+}
+
+#fidelit-recupero-password {
+    display: none;
+}
+
+#fidelit-registrati-ora {
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    width: 80%;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 460px;
+    border: 2px solid #3f3f3f;
+    background-color: #fff;
+    padding: 8px;
+    overflow: auto;
+}
+
+#fidelit-registrati-ora-privacy {
+    display: none;
+    position: absolute;
+    z-index: 100000;
+    top: 0; right: 0; bottom: 0; left: 0;
+    padding: 10px;
+    background-color: #ffffff;
+    overflow: hidden;
+    color: #000;
+}
+
+#fidelit-registrati-ora-privacy h2 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+#fidelit-registrati-ora-privacy .fidelit-testo-privacy {
+    height: 70%;
+    overflow: auto;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+#fidelit-registrati-ora-privacy .fidelit-btn-privacy {
+    padding-top: 10px;
+}
+
+#fidelit-registrati-ora-privacy .fidelit-btn-privacy .back {
+    background-color: #cc0000;
+}
+
+#fidelit-recupero-password {
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    width: 90%;
+    max-width: 550px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    height: 260px;
+    border: 2px solid #3f3f3f;
+    background-color: #fff;
+    padding: 8px;
+    overflow: auto;
+}
+
+.fidelit-btn-logout {
+    padding: 8px;
+    background-color: #890c0c;
+    border: 1px solid #630808;
+    color: #f7bbbb;
+    text-decoration: none;
+    text-underline: none;
+}
+
+.fidelit-situazione-card td {
+    text-align: center;
+}
+
+.fidelit-situazione-card small {
+    color: #828282;
+}
