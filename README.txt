@@ -4,7 +4,7 @@ Link: http://www.softwarefidelitycard.it
 Tags: gestionale, crm, fidelizzazione, fidelity, loyalty, raccolta punti, accumulo sconti, credito prepagato, acquisti ripetuti, abbonamenti, gift card, coupon card
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,9 +49,14 @@ Non disponibili.
 
 == Changelog ==
 
+= 1.1 =
+* Implementato il download automatico del FidElìt SDK ed l'upload da amministrazione dei certificati
+
 = 1.0 =
 * Prima versione disponibile
 
 == Upgrade Notice ==
 
-Non disponibili.
+= 1.1 =
+* Ora il plugin scarica automaticamente il FidElìt SDK più aggiornato
+* Integrata la possibilità di caricare i certificati, generati tramite FidElìt, direttamente dall'amministrazione

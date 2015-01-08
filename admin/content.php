@@ -10,6 +10,27 @@ if (isset($_GET['act']) && $_GET['act'] == "submit")
 			update_option("fidelit_api_key", $_POST['api_key']);
 			update_option("fidelit_api_azienda_id", $_POST['api_azienda_id']);
 			update_option("fidelit_api_punto_vendita_id", $_POST['api_punto_vendita_id']);
+
+            if (isset($_FILES['certificati']) && isset($_FILES['certificati']['name']) && pathinfo($_FILES['certificati']['name'], PATHINFO_EXTENSION) == "zip" && $_FILES['certificati']['size'] < 8000)
+            {
+                $crt_zip = new ZipArchive();
+                if ($crt_zip->open($_FILES['certificati']['tmp_name']))
+                {
+                    if (!file_exists(dirname(__FILE__)."/../cert"))
+                        @mkdir(dirname(__FILE__)."/../cert");
+                    else
+                    {
+                        @unlink(dirname(__FILE__) ."/../cert/pbl.crt");
+                        @unlink(dirname(__FILE__) ."/../cert/pbl.csr");
+                    }
+
+                    $crt_zip->extractTo(dirname(__FILE__)."/../cert", array("pbl.crt", "pbl.csr"));
+                    $crt_zip->close();
+                }
+
+                @unlink($_FILES['certificati']['tmp_name']);
+                unset($crt_zip);
+            }
 		}
         elseif ($_GET['tab'] == "configurazioni")
         {
@@ -37,6 +58,66 @@ if (isset($_GET['act']) && $_GET['act'] == "submit")
 }
 
 $fidelit_admin_active_tab = isset($_GET['tab']) ? urldecode($_GET['tab']) : "api";
+
+if (!file_exists(dirname(__FILE__)."/../FidApi_SDK/FidApi.php") || !file_exists(dirname(__FILE__)."/../FidApi_SDK/flourishlib/"))
+{
+    if (!isset($_GET['download_sdk']))
+    {
+        ?>
+        <div class="error" style="padding: 8px;">
+            Prima di poter configurare il plugin, devi scaricare l'ultima versione del FidEl&iacute;t SDK.<br />
+            <br />
+            <a class="button" href="admin.php?page=fidelit&download_sdk=1">Clicca qui per scaricarlo automaticamente</a><br />
+        </div>
+        <?
+    }
+    else
+    {
+        ?>
+        <div class="error" style="padding: 8px;">
+            <ul>
+                <li>Download avviato...</li>
+                <?
+                $sdk_dw_ch = curl_init();
+                curl_setopt($sdk_dw_ch, CURLOPT_URL, "http://api.sistemafidelity.com/sdk/php_FidApi_SDK.zip");
+                curl_setopt($sdk_dw_ch, CURLOPT_RETURNTRANSFER, 1);
+                $data = curl_exec($sdk_dw_ch);
+                curl_close ($sdk_dw_ch);
+                unset($sdk_dw_ch);
+                ?>
+                <li>Download completato. Salvo il file...</li>
+                <?
+                $sdk_zip_file = fopen(dirname(__FILE__)."/../FidApi_SDK/php_FidApi_SDK.zip", "w+");
+                fputs($sdk_zip_file, $data);
+                fclose($sdk_zip_file);
+                unset($sdk_zip_file);
+                ?>
+                <li>Scompatto l'archivio...</li>
+                <?
+                $sdk_zip = new ZipArchive();
+                if ($sdk_zip->open(dirname(__FILE__)."/../FidApi_SDK/php_FidApi_SDK.zip"))
+                {
+                    $sdk_zip->extractTo(dirname(__FILE__)."/../");
+                    $sdk_zip->close();
+                    ?><li>Archivio scompattato con successo. Aggiornamento della pagina in corso...</li><?
+                }
+                else
+                {
+                    ?><li>Impossibile scompattare l'archivio. Riprova tra qualche minuto.</li><?
+                }
+
+                unlink(dirname(__FILE__)."/../FidApi_SDK/php_FidApi_SDK.zip");
+                ?>
+            </ul>
+            <script>
+                setTimeout(function() { window.location = 'admin.php?page=fidelit'; }, 1500);
+            </script>
+        </div>
+        <?
+    }
+}
+else
+{
 ?>
 <h2 class="nav-tab-wrapper">
     <a class="nav-tab<? if ($fidelit_admin_active_tab == "api") echo " nav-tab-active";?>" href="?page=fidelit&tab=api">API</a>
@@ -46,10 +127,21 @@ $fidelit_admin_active_tab = isset($_GET['tab']) ? urldecode($_GET['tab']) : "api
 </h2>
 <br />
 <? if ($fidelit_admin_active_tab == "api") { ?>
-    <form action="admin.php?page=fidelit&tab=api&act=submit" method="post">
+    <form action="admin.php?page=fidelit&tab=api&act=submit" method="post" enctype="multipart/form-data">
         <fieldset style="border: 1px solid #ccc; padding: 10px;">
             <legend><b>API</b></legend>
             <table style="width: 100%;">
+                <tr>
+                    <td style="width: 180px;" valign="top"><label for="fidelit_api_secret">Certificati <span style="color: red">*</span></label></td>
+                    <td>
+                        <input type="file" name="certificati">
+                        <? if (!file_exists(dirname(__FILE__)."/../cert/pbl.crt") || !file_exists(dirname(__FILE__)."/../cert/pbl.csr")) { ?>
+                            <span style="color: red">(caricare il file zip generato dal software FidEl&iacute;t)</span>
+                        <? } else { ?>
+                            <span style="color: green">(aggiorna i certificati con un nuovo file zip generato dal software FidEl&iacute;t)</span>
+                        <? } ?>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width: 180px;" valign="top"><label for="fidelit_api_secret">URL piattaforma <span style="color: red">*</span></label></td>
                     <td><textarea name="url_piattaforma" id="fidelit_url_piattaforma" style="width: 100%; height: 70px;" class="required"><?php echo get_option("fidelit_url_piattaforma"); ?></textarea></td>
@@ -180,4 +272,5 @@ $fidelit_admin_active_tab = isset($_GET['tab']) ? urldecode($_GET['tab']) : "api
         </fieldset>
     </form>
     <br />
+<? } ?>
 <? } ?>
